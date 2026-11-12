@@ -1,0 +1,236 @@
+% Supplementary Material
+\setcounter{section}{0}
+\setcounter{page}{1}
+\setcounter{figure}{0}
+\setcounter{table}{0}
+\setcounter{equation}{0}
+\renewcommand{\thesection}{S1-\arabic{section}}
+\renewcommand{\theequation}{S\arabic{equation}}
+\renewcommand{\thepage}{s\arabic{page}}
+\renewcommand{\thetable}{S\arabic{table}}
+\renewcommand{\thefigure}{S\arabic{figure}}
+
+
+\clearpage
+\section*{Supplementary Information}
+\addcontentsline{toc}{section}{Supplementary Information}
+
+% Title (replicating olplain formatting)
+% \vspace{1em}
+% {\raggedright\sffamily\bfseries\fontsize{20}{25}\selectfont
+% Increasing the Recycled Content of Aluminum Automotive Body Sheets in the United States using High-Residual-Content Recycle Friendly Alloys\par}
+
+% Authors (same font as olplain)
+% \vspace{0.5em}
+% {\raggedright\sffamily\bfseries\fontsize{12}{16}\selectfont
+% Alissa Tsai\textsuperscript{a}, Constantin Chiriac\textsuperscript{b}, Daniel Freiberg\textsuperscript{b}, George Luckey\textsuperscript{b}, Daniel R. Cooper\textsuperscript{a,*} \par}
+
+% \vspace{0.5em}
+% {\raggedright\sffamily\bfseries\fontsize{10}{14}\selectfont
+% \textsuperscript{a}University of Michigan, George G. Brown Laboratory, 2350 Hayward Street, Ann Arbor, MI 48109-2125,
+% United States \par
+% \textsuperscript{b}Research \& Advanced Engineering Department, Ford Motor Company, Dearborn, MI 48121, United States\par}
+
+% \vspace{2em}
+
+% Begin SI content
+
+% SI TO-DO LIST:
+% Add context for ABS alloy user requirements table (maybe move to spreadsheet SI?)
+% Add full compositions table (spreadsheet)
+% Add full mechanical testing results (including R-value)
+% Add furnace constraint discussion
+% Add context for baseline DMFA results (compared against HRC DMFA)
+% Add results for adding Zn constraint and discuss (how do the results compare to main paper results?)
+% Add full results and constraints analysis (spreadsheet)
+% \newpage
+
+This supporting information file (S1) provides additional details that complement the main article. The accompanying spreadsheet (S2) contains model inputs, optimization results, and process-specific greenhouse gas emissions factors for the three decarbonization pathways. Both supporting files and the Python linear programming (LP) code used to perform the analysis are available at \href{https://github.com/Alaaldin04/ReMaDE-MSEC2027-Al-ABS-HRC}{https://github.com/Alaaldin04/ReMaDE-MSEC2027-Al-ABS-HRC}.
+
+\section{Ford ABS alloy user requirements} \label{SI: User Requirements}
+
+Table~\ref{tab: user_requirements_SI} summarizes key material attributes for and the metrics used to measure each Ford aluminum and steel automotive body sheet alloy.
+
+\begin{table}[!htbp]
+\caption{Ford ABS Material Selection Design Guide}
+\label{tab: user_requirements_SI}
+\centering
+\begin{threeparttable}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{@{}p{1.5cm} p{2.4cm} p{2cm} p{2.5cm} p{4cm} p{3.5cm} p{3.8cm} p{3.2cm} p{2.7cm} p{2.7cm}@{}}
+\toprule
+\textbf{Sheet} & \textbf{Application} & \textbf{Performance} & \textbf{Attribute} & \textbf{Sample Preparation} & \textbf{Test Method} & \textbf{Metric} & \textbf{Incumbent Material\tnote{a}} & \textbf{} & \textbf{} \\
+\midrule
+{Aluminum} & {Class A}                          & {In-service}    & {Design}          & {As-rolled sheet}                                                     & {Thickness measurement with a micrometer} & {Thickness range}                                          & {AlSi0.75Mg0.6Cu0.2}          & {}             & {}                   \\
+{Aluminum} & {Class A}                          & {In-service}    & {Dent Resistance} & {Natural age to 30 days, 2\% prestrain, T81 heat treatment}           & {ASTM E8 Tensile Test}                    & {0.2\% Yield Strength}                                     & {AlSi0.75Mg0.6Cu0.2}          & {}             & {}                   \\
+{Aluminum} & {Class A}                          & {In-service}    & {Corrosion}       & {Natural age to 30 days}                                              & {ASTM G3-14 Electro-Chemical Testing}     & {Open circuit potential and potentiodynamic polarization}  & {AlSi0.75Mg0.6Cu0.2}          & {}             & {}                   \\
+{Aluminum} & {Class A}                          & {In-service}    & {Surface finish}  & {Natural age to 30 days, pre-strain 15\%}                             & {Surface profilometer}                    & {Ra}                                                       & {AlSi0.75Mg0.6Cu0.2}          & {}             & {}                   \\
+{Aluminum} & {Class A}                          & {Manufacturing} & {Formability}     & {Natural age to 30 days}                                              & {ASTM E8 Tensile Test}                    & {Uniform elongation}                                       & {AlSi0.75Mg0.6Cu0.2}          & {}             & {}                   \\
+{Aluminum} & {Class A}                          & {Manufacturing} & {Springback}      & {Natural age to 30 days}                                              & {ASTM E8 Tensile Test}                    & {0.2\% Yield Strength}                                     & {AlSi0.75Mg0.6Cu0.2}          & {}             & {}                   \\
+{Aluminum} & {Class A}                          & {Manufacturing} & {Edge stretch}    & {Natural age to 30 days}                                              & {ASTM E8 Tensile Test}                    & {Total elongation}                                         & {AlSi0.75Mg0.6Cu0.2}          & {}             & {}                   \\
+{Aluminum} & {Class A}                          & {Manufacturing} & {Hemming}         & {Natural age to 30 days, pre-strain 15\%}                             & {180 degree bend, 1t radius}              & {Surface appearance on outer radius with no magnification} & {AlSi0.75Mg0.6Cu0.2}          & {}             & {}                   \\ \hline
+{Aluminum} & {Stiffness limited reinforcements} & {In-service}    & {Design}          & {As-rolled sheet}                                                     & {Thickness measurement with a micrometer} & {Thickness range}                                          & {AlMg4.6Mn0.35}               & {AlMg3.2Mn0.5} & {AlSi0.75Mg0.6Cu0.2} \\
+{Aluminum} & {Stiffness limited reinforcements}  & {In-service}    & {Strength}        & {Natural age to 30 days, T81 = paint bake oven 180 \textdegree C for 60 minutes} & {ASTM E8 Tensile Test}                    & {0.2\% Yield Strength}                                     & {AlMg4.6Mn0.35}               & {AlMg3.2Mn0.5} & {AlSi0.75Mg0.6Cu0.2} \\
+{Aluminum} & {Stiffness limited reinforcements} & {In-service}    & {Corrosion}       & {Natural age to 30 days}                                              & {ASTM G3-14 Electro-Chemical Testing}     & {Open circuit potential and potentiodynamic polarization}  & {AlMg4.6Mn0.35}               & {AlMg3.2Mn0.5} & {AlSi0.75Mg0.6Cu0.2} \\
+{Aluminum} & {Stiffness limited reinforcements} & {In-service}    & {Surface finish}  & {Natural age to 30 days, pre-strain 15\%}                             & {Surface profilometer}                    & {Ra}                                                       & {AlMg4.6Mn0.35}               & {AlMg3.2Mn0.5} & {AlSi0.75Mg0.6Cu0.2} \\
+{Aluminum} & {Stiffness limited reinforcements} & {Manufacturing} & {Formability}     & {Natural age to 30 days}                                              & {ASTM E8 Tensile Test}                    & {Uniform elongation}                                       & {AlMg4.6Mn0.35}               & {AlMg3.2Mn0.5} & {AlSi0.75Mg0.6Cu0.2} \\
+{Aluminum} & {Stiffness limited reinforcements} & {Manufacturing} & {Springback}      & {Natural age to 30 days}                                              & {ASTM E8 Tensile Test}                    & {0.2\% Yield Strength}                                     & {AlMg4.6Mn0.35}               & {AlMg3.2Mn0.5} & {AlSi0.75Mg0.6Cu0.2} \\
+{Aluminum} & {Stiffness limited reinforcements} & {Manufacturing} & {Edge stretch}    & {Natural age to 30 days}                                              & {ASTM E8 Tensile Test}                    & {Total elongation}                                         & {AlMg4.6Mn0.35}               & {AlMg3.2Mn0.5} & {AlSi0.75Mg0.6Cu0.2} \\ \hline
+{Aluminum} & {Strength limited reinforcements}  & {In-service}    & {Design}          & {As-rolled sheet}                                                     & {Thickness measurement with a micrometer} & {Thickness range}                                          & {AlSi0.75Mg0.75Cu0.65}        & {}             & {}                   \\
+{Aluminum} & {Strength limited reinforcements}  & {In-service}    & {Strength}        & {Natural age to 30 days, T82 heat treatment}                          & {ASTM E8 Tensile Test}                    & {0.2\% Yield Strength}                                     & {AlSi0.75Mg0.75Cu0.65}        & {}             & {}                   \\
+{Aluminum} & {Strength limited reinforcements}  & {In-service}    & {Fracture}        & {Natural age to 30 days, T82 heat treatment = T6}                     & {ASTM E8 Tensile Test}                    & {Reduction of area}                                        & {AlSi0.75Mg0.75Cu0.65}        & {}             & {}                   \\
+{Aluminum} & {Strength limited reinforcements}  & {In-service}    & {Corrosion}       & {Natural age to 30 days}                                              & {ASTM G3-14 Electro-Chemical Testing}     & {Open circuit potential and potentiodynamic polarization}  & {AlSi0.75Mg0.75Cu0.65}        & {}             & {}                   \\
+{Aluminum} & {Strength limited reinforcements}  & {In-service}    & {Surface finish}  & {Natural age to 30 days, pre-strain 15\%}                             & {Surface profilometer}                    & {Ra}                                                       & {AlSi0.75Mg0.75Cu0.65}        & {}             & {}                   \\
+{Aluminum} & {Strength limited reinforcements}  & {Manufacturing} & {Formability}     & {Natural age to 30 days}                                              & {ASTM E8 Tensile Test}                    & {Uniform elongation}                                       & {AlSi0.75Mg0.75Cu0.65}        & {}             & {}                   \\
+{Aluminum} & {Strength limited reinforcements}  & {Manufacturing} & {Springback}      & {Natural age to 30 days}                                              & {ASTM E8 Tensile Test}                    & {0.2\% Yield Strength}                                     & {AlSi0.75Mg0.75Cu0.65}        & {}             & {}                   \\
+{Aluminum} & {Strength limited reinforcements}  & {Manufacturing} & {Edge stretch}    & {Natural age to 30 days}                                              & {ASTM E8 Tensile Test}                    & {Total elongation}                                         & {AlSi0.75Mg0.75Cu0.65}        & {}             & {}                   \\ \hline
+{Steel}    & {Class A}                          & {In-service}    & {Design}          & {As-rolled sheet}                                                     & {Thickness measurement with a micrometer} & {Thickness range}                                          & {FeC0.08Mn0.7}                & {}             & {}                   \\
+{Steel}    & {Class A}                          & {In-service}    & {Dent Resistance} & {Natural age to 30 days, 2\% prestrain, PB heat treatment}            & {ASTM E8 Tensile Test}                    & {0.2\% Yield Strength}                                     & {FeC0.08Mn0.7}                & {}             & {}                   \\
+{Steel}    & {Class A}                          & {In-service}    & {Corrosion}       & {Natural age to 30 days}                                              & {ASTM G3-14 Electro-Chemical Testing}     & {Open circuit potential and potentiodynamic polarization}  & {FeC0.08Mn0.7}                & {}             & {}                   \\
+{Steel}    & {Class A}                          & {In-service}    & {Surface finish}  & {Natural age to 30 days, pre-strain 15\%}                             & {Surface profilometer}                    & {Ra}                                                       & {FeC0.08Mn0.7}                & {}             & {}                   \\
+{Steel}    & {Class A}                          & {Manufacturing} & {Formability}     & {Natural age to 30 days}                                              & {ASTM E8 Tensile Test}                    & {N-VALUE (10-20\%)}                                        & {FeC0.08Mn0.7}                & {}             & {}                   \\
+{Steel}    & {Class A}                          & {Manufacturing} & {Springback}      & {Natural age to 30 days}                                              & {ASTM E8 Tensile Test}                    & {0.2\% Yield Strength}                                     & {FeC0.08Mn0.7}                & {}             & {}                   \\
+{Steel}    & {Class A}                          & {Manufacturing} & {Edge stretch}    & {Natural age to 30 days}                                              & {ISO 16630-2017 Hole Expansion Test}      & {HER}                                                      & {FeC0.08Mn0.7}                & {}             & {}                   \\
+{Steel}    & {Class A}                          & {Manufacturing} & {Hemming}         & {Natural age to 30 days, pre-strain 15\%}                             & {180 degree bend, 1t radius}              & {Surface appearance on outer radius with no magnification} & {FeC0.08Mn0.7}                & {}             & {}                   \\ \hline
+{Steel}    & {Stiffness limited reinforcements} & {In-service}    & {Design}          & {As-rolled sheet}                                                     & {Thickness measurement with a micrometer} & {Thickness range}                                          & {FeC0.18Mn2.5}                & {}             & {}                   \\
+{Steel}    & {Stiffness limited reinforcements} & {In-service}    & {Strength}        & {Natural age to 30 days}                                              & {ASTM E8 Tensile Test}                    & {Tensile Strength}                                         & {FeC0.18Mn2.5}                & {}             & {}                   \\
+{Steel}    & {Stiffness limited reinforcements} & {In-service}    & {Surface finish}  & {Natural age to 30 days, pre-strain 15\%}                             & {Surface profilometer}                    & {Ra}                                                       & {FeC0.18Mn2.5}                & {}             & {}                   \\
+{Steel}    & {Stiffness limited reinforcements} & {Manufacturing} & {Formability}     & {Natural age to 30 days}                                              & {ASTM E8 Tensile Test}                    & {N-Value (4-6\%)}                                          & {FeC0.18Mn2.5}                & {}             & {}                   \\
+{Steel}    & {Stiffness limited reinforcements} & {Manufacturing} & {Springback}      & {Natural age to 30 and 90 days}                                       & {ASTM E8 Tensile Test}                    & {Change in YS between 30 and 90 days of natural aging}     & {FeC0.18Mn2.5}                & {}             & {}                   \\
+{Steel}    & {Stiffness limited reinforcements} & {Manufacturing} & {Edge stretch}    & {Natural age to 30 days}                                              & {ISO 16630-2017 Hole Expansion Test}      & {HER\%}                                                    & {FeC0.18Mn2.5}                & {}             & {}                   \\ \hline
+{Steel}    & {Strength limited reinforcements}  & {In-service}    & {Corrosion}       & {Natural age to 30 days}                                              & {ASTM G3-14 Electro-Chemical Testing}     & {Open circuit potential and potentiodynamic polarization}  & {FeC0.18Mn2.5}                & {}             & {}                   \\
+{Steel}    & {Strength limited reinforcements}  & {In-service}    & {Design}          & {As-rolled sheet}                                                     & {Thickness measurement with a micrometer} & {Thickness range}                                          & {FeC0.225Mn1.25}              & {}             & {}                   \\
+{Steel}    & {Strength limited reinforcements}  & {In-service}    & {Strength}        & {Natural age to 30 days, PB heat treatment}                           & {ASTM E8 Tensile Test}                    & {0.2\% Yield Strength}                                     & {FeC0.225Mn1.25}              & {}             & {}                   \\
+{Steel}    & {Strength limited reinforcements}  & {In-service}    & {Fracture}        & {Natural age to 30 days, PB heat treatment}                           & {FLTM BB 119-01 V Bend Test}              & {Bending angle}                                            & {FeC0.225Mn1.25}              & {}             & {}                   \\ 
+{Steel}    & {Strength limited reinforcements}  & {In-service}    & {Corrosion}       & {Natural age to 30 days}                                              & {ASTM G3-14 Electro-Chemical Testing}     & {Open circuit potential and potentiodynamic polarization}  & {FeC0.225Mn1.25}              & {}             & {}                  \\
+\bottomrule
+\end{tabular}%
+}
+\begin{tablenotes}
+\tiny % or \tiny to match the visual size inside \resizebox
+\item[a] AlSi0.75Mg0.6Cu0.2 = Low Cu (AA6005C); AlMg4.6Mn0.35 = High Mg (AA5182); AlMg3.2Mn0.5 = Low Mg (AA5754); AlSi0.75Mg0.75Cu0.65 = High Cu (AA6111)
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+\FloatBarrier
+
+\section{Economic scrap charge constraint on secondary furnaces}
+
+The furnace scrap constraint reflects the reality that recycling becomes economically and environmentally unviable when the scrap fraction in the furnace charge is too low. As the scrap charge decreases, the cost and greenhouse gas (GHG) emissions from purchasing and remelting primary aluminum begin to outweigh the benefits of displacing only a small portion of primary material. For recycling—using a furnace charge that blends scrap with primary aluminum—to result in lower emissions than direct alloying with 100\% primary aluminum, the scrap charge $\alpha$ must exceed a certain threshold. This can be approximated by modeling scrap as emissions-free, highlighting the minimum scrap fraction required for net environmental benefit.
+
+
+% $Emissions_Primary*(1-alpha)+Emissions_Remelting<Emissions_Primary$
+\begin{equation} \label{eqn: Min alpha (emissions)}
+Emissions_{primary} \times (1-\alpha)+Emissions_{remelting} < Emissions_{primary}
+\end{equation}
+
+Using $Emissions_{primary}$ = \SI{8.072}{kg CO_{2}e/kg_{ingot}} and 
+$Emissions_{remelting}$ = \SI{0.513}{kg CO_{2}e/kg_{ingot}}, the minimum scrap furnace charge for recycling to be competitive from an emissions perspective is $\alpha$ = 0.064
+
+The equivalent equation for the economics of recycling is:
+
+\begin{equation} \label{eqn: Min alpha (cost)}
+Cost_{primary} \times (1-\alpha)+Cost_{remelting} < Cost_{primary}
+\end{equation}
+
+\begin{figure}[!ht]
+	\centering
+	\begin{subfigure}{\linewidth}
+       \centering
+	   \includegraphics[width=0.7\linewidth]{Figures/furnace_charge_constraint.jpg}
+	\end{subfigure}
+	\caption{Minimum fraction of scrap charge in secondary furnace ($\alpha$) required for economically viable recycling}
+	\label{fig: Furnace charge}
+\end{figure}
+
+Figure~\ref{fig: Furnace charge} shows the minimum scrap charge fraction required for economically viable recycling, plotted as a function of scrap price and melting cost. Sensible values for these costs—based on energy requirements for remelting and scrap prices relative to primary aluminum, as reported by \cite{schlesingerAluminumRecycling2006}—highlight how economic feasibility depends on the scrap type.
+If the scrap input consists entirely of Twitch (the relatively inexpensive, aluminum-rich stream from ELV recycling), the required scrap charge can be as low as 20\%. In contrast, if the input is exclusively Tooth (higher-cost, segregated alloy clippings and solids), the minimum viable scrap charge may be as large as 52\%.
+Given that today's scrap stream is primarily production scrap and future streams will likely include a mix of production and post-consumer scrap, a baseline scrap charge fraction ($\alpha$) of 0.35 is used as a reasonable assumption in the model, which was vetted by an ABS sheet mill industrial collaborator.
+
+\newpage
+
+\section{Baseline projected annual U.S. Ford ABS ingot demand, production scrap, and post-consumer scrap} \label{SI: Baseline DMFA}
+
+Figure~\ref{fig: DMFA_Ford} summarizes the baseline Ford ABS DMFA results used in this analysis. Data on projected annual U.S. ABS embedded consumption and post-consumer scrap arisings (2025-2050) are extracted from the flow-driven dynamic material flow analysis (DMFA) dataset \cite{zhuDynamicMaterialFlow2025} described by \cite{dengDecarbonizingUSAluminum2025}. Embedded consumption is the mass of fabricated aluminum sheet installed on assembled vehicles for sale in the U.S. and post-consumer scrap arising is the mass of ABS in ELVs before applying collection rates and (solid-state) scrap processing yields. \cite{zhuDynamicMaterialFlow2025} model ABS DMFA scenarios using two vehicle lifespan models and three ABS demand growth projections.
+
+\begin{figure}[!ht]
+	\centering
+    \begin{subfigure}[c]{0.48\linewidth}
+        \centering
+        \includegraphics[width=0.48\linewidth]{Figures/Ford DMFA legend.png}
+    \end{subfigure}
+	\begin{subfigure}[c]{0.48\linewidth}
+		\includegraphics[width=\linewidth]{Figures/DomesticABSIngotDemand.png}
+        \caption{Annual ABS ingot demand}
+		\label{fig: IngDem}
+	\end{subfigure}
+	\begin{subfigure}{0.48\linewidth}
+		\includegraphics[width=\linewidth]{Figures/DomesticELVABSscraparising.png}
+		\caption{Annual ELV ABS scrap arising (i.e., before collection or processing yields)}
+		\label{fig: ELVscrap}
+	\end{subfigure}
+    \begin{subfigure}{0.48\linewidth}
+		\includegraphics[width=\linewidth]{Figures/DomesticABSproductionscrap.png}
+        \caption{Annual ABS production scrap arising *91\% of production scrap arising modeled as available for closed-loop recycling}
+		\label{fig: Manufscrap}
+	\end{subfigure}
+     \caption{Projected annual (a) ingot demand, (b) ELV scrap volumes, and (c) production scrap volumes for Ford ABS alloys in Ford F-Series (F-150 and Super Duty), Expedition, and Navigator vehicle models from 2025-2050. The distribution of embedded consumption (and thus, ingot demand) across the Ford vehicle models is approximately the same for the 5xxx series (Low-Mg and High-Mg) alloys. For the 6xxx series (Low-Cu and High-Cu) alloys, however, the SUV models (Navigator and Expedition) contain significantly more High-Cu than Low-Cu ABS alloy by mass than the F-Series models, which have a nearly even split between the two 6xxx series alloys \citep{zhu_coming_2021}. Between 1 and 7\% deregistered vehicles are exported as they reach EOL in 2025 through 2050 \citep{zhu_coming_2021}. This slightly impacts the ELV ABS scrap available for recycling domestically in the United States.
+     } \label{fig: DMFA_Ford}
+\end{figure}
+
+As an artifact of how \cite{zhuDynamicMaterialFlow2025} compiled the DMFA dataset, there is a small inconsistency in consumption growth rates used for Ford alloys (based on \cite{zhu_coming_2021}) versus non-Ford alloys (based on \cite{ducker_2023}). In the present study, the DMFA is updated so that the growth rate scenarios for Ford and non-Ford vehicles are consistent and based on the more recent \cite{ducker_2023} study: a base case annual growth rate equivalent to 2.44\% of 2020 consumption, a low growth rate of 0\%, and a high growth rate with a compound annual growth rate of 2.44\%. The embedded consumption data from this updated DMFA are combined with the supply chain yields from \cite{heidari_circular_2026} for rolling and heat treatments (66\%), blanking and stamping (66.5\%), and assembly (99.5\%) to project ABS ingot demand and production scrap generation. It is assumed that 100\% of production scrap is collected for recycling, and that 91\% of the collected ABS production scrap is available for closed-loop recycling, as reported by \cite{heidari_circular_2026}. For post-consumer scrap, the analysis assumes a 95\% collection rate \citep{wang_environmental_2022} and a 95\% yield \citep{kelly_recycling_2018} for solid-state scrap processing (e.g., from shredding and sortation to produce Twitch).
+
+% The base-case analyses in the present study employ Ford ABS DMFA data generated using the \cite{liaoUSLDVLifespan2025} lifespan model and baseline ABS demand growth rates. Figure~\ref{fig: DMFA_Ford} summarizes the baseline Ford ABS DMFA results used in this analysis, with the tabulated DMFA data—generated using the \cite{liaoUSLDVLifespan2025} lifespan model (provided in S2).
+
+\section{Results with Zn constraints added} \label{SI: Results w/ Zn}
+
+Figure~\ref{fig: Zn PCRR/PCRC} presents the maximum potential PCRRs and PCRCs for each combination of scrap chemistry and ABS alloy composition. When the Zn constraints are added to LP model, the results suggest that substituting existing ABS alloys with aggressive HRC chemistries exhibits an improvement in maximum potential PCRR and PCRC over that with moderate HRC chemistries when considering the F-150 Twitch scrap chemistry. However, for the General Twitch scrap chemistry scenarios, the two HRC alternatives have the same maximum potential to improve PCRR and PCRC, as shown in Figure~\ref{fig: Zn PCRR/PCRC}. This indicates the main compositional constraints restricting further utilization of post-consumer scrap are those on alloying element concentrations shared between the two alternate HRC chemistries. Section 2.1 describes the differences between the moderate and aggressive HRC chemistries: the two HRC 5xxx series compositions differ only in Cu content while the two HRC 6xxx series compositions differ in Si and Mg content. The results indicate that the increased Cu concentration in the 5xxx series alloy and the increased Si and Mg concentrations in the 6xxx series alloy of the aggressive HRC composition compared to the moderate do not influence the maximum potential post-consumer scrap used for the ``General Twitch'' post-consumer scrap chemistry. This is confirmed by the constraints analysis on the moderate and aggressive HRC chemistry scenarios, which share the same top binding constraints. For both scenarios, the two most impactful binding constraints in 2050 are those on the concentrations of Zn in the 6xxx series alloys (``Low Cu'' and HRC 6xxx). This analysis reveals that high concentrations of Zn as a contaminant in ELV scrap significantly limit the closed-loop recyclability of ABS post-consumer scrap. Overall, comparing the optimization results with and without the Zn composition constraints indicates the compositional mismatch of Zn between the post-consumer scrap streams and the product alloys has a strong influence on closed-loop recyclability of ABS alloys. 
+
+\begin{figure}[ht!]
+	\centering
+    \begin{subfigure}{\linewidth}
+        \centering
+		\includegraphics[width=0.5\linewidth]{Figures/HRC_Key.png}
+	\end{subfigure}
+	\begin{subfigure}{\linewidth}
+		\includegraphics[width=0.48\linewidth]{Figures/T_RR_EOL.png}
+        \includegraphics[width=0.48\linewidth]{Figures/F_RR_EOL.png}
+        \caption{Post-Consumer Recycling Rates (PCRRs) for General Twitch ELV scrap chemistry (left) and Isolated F-150 Shredding Twitch ELV scrap chemistry (right); Zn constraints added}
+		\label{fig: Zn PCRR}
+	\end{subfigure}
+	\begin{subfigure}{\linewidth}
+        \includegraphics[width=0.48\linewidth]{Figures/T_RC_EOL.png}
+		\includegraphics[width=0.48\linewidth]{Figures/F_RC_EOL.png}
+		\caption{Post-Consumer Recycled Content (PCRCs) for General Twitch ELV scrap chemistry (left) and Isolated F-150 Shredding Twitch ELV scrap chemistry (right); Zn constraints added}
+		\label{fig: Zn PCRC}
+	\end{subfigure}
+	\caption{Projected closed-loop PCRRs and PCRCs of Ford ABS alloys 2025-2050 with Zn constraints added}
+	\label{fig: Zn PCRR/PCRC}
+\end{figure}
+
+As the HRC scenarios do not replace the Low Cu alloy, binding constraints on the Low Cu alloy, notably that of Zn, remain. However, raising the concentrations on these alloying elements in other product alloys can still improve the recyclability of ELV Twitch scrap. In 2050, the maximum PCRR is projected to drop to 25.4\% (General Twitch) and 31.0\% (F-150 Twitch) for the moderate HRC chemistries and 25.4\% (General Twitch) and 34.8\% (F-150 Twitch) for the aggressive HRC chemistries, which is a considerable increase over the 8-13\% maximum PCRRs expected with the supplier target chemistry. The maximum PCRCs remain constant at 6.1-7.8\% for both HRC chemistries and both ELV Twitch chemistries compared to the 2-3\% for the supplier target chemistries. The differences in the maximum PCRRs and PCRCs between the moderate and aggressive HRC chemistries is minimal for the General ELV Twitch chemistries and remain relatively small for the Isolated F-150 Twitch chemistries. This indicates that the more relaxed composition limits in the aggressive HRC scenario offer only marginal improvements in closed-loop recyclability compared to the moderate HRC cases.
+
+\newpage
+
+\section{Aluminum ABS supply chain emissions and projected emissions over time (decarbonization pathways)}
+
+Annual supply chain emissions (2025–2050) attributable to the production of U.S. aluminum ABS components were calculated under a BAU scenario and selected recycling intervention pathways. Figure~\ref{fig: ABS process flow} illustrates the system boundary used for these emission calculations. As more post-consumer scrap is directed toward secondary ingot production, emissions-intensive primary aluminum is progressively displaced. The emissions intensities of each process in ABS supply chain under all decarbonization scenarios are defined in S2 and summarized in Figure~\ref{fig: emissions_pathways}. Process yields are modeled as constant over the time period. Following \cite{heidari_circular_2026}, who found that accounting for alloying had a minimal impact on the emissions intensity of primary aluminum ABS ingots, the emissions intensity (per kg) of alloying elements is assumed to be equal to that of primary aluminum.
+
+\begin{figure}[ht!]
+	\centering
+    \includegraphics[width=\linewidth]{Figures/ABS process flow.png}
+    \caption{System boundary for calculating supply chain emissions}
+    \label{fig: ABS process flow}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.7\linewidth]{Figures/emissions_pathways.png}
+    \caption{Projected emissions intensities for frozen, moderate, and aggressive decarbonization pathways for primary aluminum production}
+    \label{fig: emissions_pathways}
+\end{figure}
+
+% etc.
+
+

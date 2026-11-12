@@ -1,0 +1,65 @@
+% \documentclass[fleqn,10pt,lineno]{olplainarticle}
+\documentclass[final,3p,times,authoryear]{elsarticle}
+% Use option lineno for line numbers 
+% \usepackage{natbib}
+\bibliographystyle{elsarticle-harv}
+\usepackage{mathtools,zref-savepos}
+\usepackage{amsmath,calc}
+\newlength{\LPlhbox}
+\usepackage{graphicx}
+\usepackage{siunitx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{hyperref}
+\usepackage{multirow}
+\usepackage{makecell}
+\usepackage{booktabs}
+\usepackage{tabularray}
+\usepackage{threeparttable}
+\usepackage{ulem}
+\usepackage{verbatim}
+\usepackage{siunitx}
+\usepackage{placeins}
+\usepackage{lineno}
+
+\begin{document}
+\begin{frontmatter}
+
+\title{Impact of Using High-Residual-Content Recycle Friendly Alloys on the Recycled Content of Aluminum Automotive Body Sheets in the United States}
+
+\author[a]{Alissa Tsai} %% Author name
+\author[a]{Ala'aldin Alafaghani}
+\author[b]{Constantin Chiriac}
+\author[b]{Daniel Freiberg}
+\author[b]{George Luckey}
+\author[a]{Daniel R. Cooper\corref{cor1}}
+\ead{drcooper@umich.edu}
+\cortext[cor1]{Corresponding author.}
+
+%% Author affiliation
+\affiliation[a]{organization={University of Michigan, George G. Brown Laboratory},%Department and Organization
+            addressline={2350 Hayward Street}, 
+            city={Ann Arbor},
+            postcode={48109-2125}, 
+            state={MI},
+            country={United States}}
+\affiliation[b]{organization={Research \& Advanced Engineering Department, Ford Motor Company},%Department and Organization
+            addressline={3300 Mustang Alley}, 
+            city={Dearborn},
+            postcode={48124}, 
+            state={MI},
+            country={United States}}
+
+% \flushbottom
+% \maketitle
+% \thispagestyle{empty}
+
+\end{frontmatter}
+
+\linenumbers
+
+\include{SI}
+
+\bibliography{references}
+
+\end{document}
